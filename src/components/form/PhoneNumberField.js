@@ -12,7 +12,7 @@ const phoneOption = [
 export const PhoneNumberField = () => {
     const prefixSelector = (
         <Fragment>
-            <Form.Item className="hostel-regis-phone-container" initialValue={'+66'} name="phonecode" noStyle>
+            <Form.Item className="hostel-regis-phone-container" initialValue={'+66'} name="phoneCode" noStyle>
                 <Select className="hostel-regis-phone-selection">
                     {phoneOption.map((option) => (
                         <Select.Option value={option.value}>
@@ -25,7 +25,7 @@ export const PhoneNumberField = () => {
         </Fragment>
     )
     return (
-        <Form.Item name="phone" label="Phone Number" initialValue={''} rules={[{ required: true, message: 'Phone number is required!' }]}>
+        <Form.Item name="phoneNumber" label="Phone Number" initialValue={''} rules={[{ required: true, message: 'Phone number is required!' }]}>
             <Input addonBefore={prefixSelector} className="hostel-regis-phone-input" maxLength={9} minLength={9} />
         </Form.Item>
     )

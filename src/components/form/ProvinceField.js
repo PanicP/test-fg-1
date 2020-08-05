@@ -1,18 +1,18 @@
 import React from 'react'
 import { Form, Input } from 'antd'
 
-export const FirstNameField = ({ data }) => (
+export const ProvinceField = ({ data }) => (
     <Form.Item
-        name="firstName"
-        label="Firstname"
+        name="province"
+        label="Province"
         initialValue={data}
         rules={[
             {
                 required: true,
-                message: 'Firstname is required!',
+                message: 'Province is required!',
             },
         ]}
     >
-        <Input placeholder="John" />
+        <Input placeholder="Bangkok" />
     </Form.Item>
 )

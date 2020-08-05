@@ -38,15 +38,39 @@ export const callLogOut = async () => {
     }
 }
 
-export const callSignUp = async ({ email, password }) => {
-    try {
+export const callSignUp = async ({ data }) => {
+    try { 
         await firebase
             .auth()
-            .createUserWithEmailAndPassword(email, password)
+            .createUserWithEmailAndPassword(data.email, data.password)
             .catch(function (error) {
                 console.log(error)
                 return false
             })
+
+        await firebase
+            .firestore()
+            .collection('users')
+            .doc(data.email)
+            .set({
+                address: data.address,
+                age: data.age,
+                district: data.district,
+                email: data.email,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                phoneNumber: data.phoneNumber,
+                phoneCode: data.phoneCode,
+                postalCode: data.postalCode,
+                province: data.province,
+                subDistrict: data.subDistrict,
+                title: data.title,
+            })
+            .catch(function (error) {
+                console.log(error)
+                return false
+            })
+
         return true
     } catch (error) {
         return false

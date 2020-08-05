@@ -10,6 +10,12 @@ import { ConfirmPasswordField } from './ConfirmPasswordField'
 import { history } from '../../history'
 import { Redirect } from 'react-router-dom'
 import { callSignUp } from '../../features/auth/authAPI'
+import { AddressField } from './AddressField'
+import { SubDistrictField } from './SubDistrictField'
+import { DistrictField } from './DistrictField'
+import { ProvinceField } from './ProvinceField'
+import { PostalCodeField } from './PostalCodeField'
+import { AgeField } from './AgeField'
 
 export const RegisterPanel = () => {
     const [form] = Form.useForm()
@@ -17,7 +23,8 @@ export const RegisterPanel = () => {
 
     const onFinish = async (values) => {
         console.log('on register', values.email, values.password)
-        const isSignUpSucceeded = await callSignUp({ email: values.email, password: values.password })
+        console.log(values)
+        const isSignUpSucceeded = await callSignUp({ data: values })
         // setIsAuthed(isLoginSucceeded)
         if (isSignUpSucceeded) {
             history.push('/')
@@ -40,19 +47,39 @@ export const RegisterPanel = () => {
                 </Col>
             </Row>
             <Row gutter={16}>
-                <Col span={6}>
+                <Col span={4}>
                     <TitleField />
                 </Col>
-                <Col span={9}>
+                <Col span={10}>
                     <FirstNameField />
                 </Col>
-                <Col span={9}>
+                <Col span={10}>
                     <LastNameField />
                 </Col>
             </Row>
             <Row gutter={16}>
-                <Col span={17}>
+                <Col span={4}>
+                    <AgeField />
+                </Col>
+                <Col span={10}>
                     <PhoneNumberField />
+                </Col>
+                <Col span={10}>
+                    <AddressField />
+                </Col>
+            </Row>
+            <Row gutter={16}>
+                <Col span={6}>
+                    <SubDistrictField />
+                </Col>
+                <Col span={6}>
+                    <DistrictField />
+                </Col>
+                <Col span={6}>
+                    <ProvinceField />
+                </Col>
+                <Col span={6}>
+                    <PostalCodeField />
                 </Col>
             </Row>
             <Row gutter={16}>
