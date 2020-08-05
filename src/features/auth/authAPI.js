@@ -1,33 +1,54 @@
 import axios from 'axios'
 import firebase from '../../app/firebase'
+import { useForm } from 'antd/lib/form/Form'
 
-export const callAuth = async () => {
+export const callLogIn = async ({ email, password }) => {
     try {
         await firebase
             .auth()
-            .signInWithEmailAndPassword('panicp@gmail.com', 'panicpoggers')
+            .signInWithEmailAndPassword(email, password)
             .catch(function (error) {
                 var errorCode = error.code
                 var errorMessage = error.errorMessage
                 console.log(errorCode, errorMessage)
             })
-        var user = firebase.auth().currentUser
+        const user = firebase.auth().currentUser
         if (user) {
-            console.log('1')
-            console.log(user)
-            // User is signed in.
-        } else {
-            console.log('2')
-            // No user is signed in.
+            console.log('logged in', await user.getIdToken())
+            // localStorage.setItem('token', user.getIdToken())
+            return true
         }
-        // const res = await axios.post(
+        return false
+        // //test sign out
+        // await firebase.auth().signOut().then(function() {
+        //     // Sign-out successful.
+        //   }).catch(function(error) {
+        //     // An error happened.
+        //   })
+    } catch (error) {
+        return false
+    }
+}
 
-        //     'https://42a3c039-1cf6-4bd8-b159-07129942aa50.mock.pstmn.io/auth'
-        // )
-        // if (res) {
-        //     // localStorage.setItem('authToken', res.data.token)
-        //     return true
-        // }
+export const callLogOut = async () => {
+    try {
+        // //test sign out
+        console.log('1')
+        await firebase
+            .auth()
+            .signOut()
+            .catch(function (error) {
+                return false
+            })
+            console.log('2')
+        const user = firebase.auth().currentUser
+        console.log('3')
+        if (!user) {
+            console.log('logged out')
+            return true
+        }
+        console.log('!user')
+        return false
     } catch (error) {
         return false
     }

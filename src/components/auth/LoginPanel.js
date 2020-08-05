@@ -2,23 +2,25 @@ import React, { useState } from 'react'
 import { Form, Input, Button, Row, Col } from 'antd'
 import { history } from '../../history'
 import { Redirect } from 'react-router-dom'
-import { callAuth } from '../../features/auth/authAPI'
-// import { callAuth } from '../../features/auth/auth-api'
+import { callLogIn } from '../../features/auth/authAPI'
+import firebase from '../../app/firebase'
+// import { callLogIn } from '../../features/auth/auth-api'
 // import { Loading } from '../util'
 // import { useUtil } from '../../features/util/util-store'
 
 export const LoginPanel = () => {
     // const { handleSetIsLoading } = useUtil()
-    const [isAuthed, setIsAuthed] = useState(localStorage.getItem('authToken'))
+    const user = firebase.auth().currentUser
+    console.log(user, 'user')
+    const [isAuthed, setIsAuthed] = useState( user ? user.getIdToken() : '')
 
     const onFinish = async (values) => {
         // handleSetIsLoading({ isLoading: true })
-        // const isLoginSucceeded = await callAuth()
-        callAuth()
-        const isLoginSucceeded = true
+        const isLoginSucceeded = await callLogIn({ email: values.email, password: values.password })
+        console.log(isLoginSucceeded, 'isloginsuc')
         setIsAuthed(isLoginSucceeded)
         if (isLoginSucceeded) {
-            history.push('/')
+            // history.push('/dada')
         }
         // handleSetIsLoading({ isLoading: false })
     }
@@ -42,8 +44,8 @@ export const LoginPanel = () => {
                 <Col span={3} />
                 <Col span={16}>
                     <Form.Item
-                        label="Username"
-                        name="username"
+                        label="E-mail"
+                        name="email"
                         rules={[
                             {
                                 required: true,
