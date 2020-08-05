@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Form, Input, Button, Row, Col } from 'antd'
 import { history } from '../../history'
 import { Redirect } from 'react-router-dom'
+import { callAuth } from '../../features/auth/authAPI'
 // import { callAuth } from '../../features/auth/auth-api'
 // import { Loading } from '../util'
 // import { useUtil } from '../../features/util/util-store'
@@ -13,6 +14,7 @@ export const LoginPanel = () => {
     const onFinish = async (values) => {
         // handleSetIsLoading({ isLoading: true })
         // const isLoginSucceeded = await callAuth()
+        callAuth()
         const isLoginSucceeded = true
         setIsAuthed(isLoginSucceeded)
         if (isLoginSucceeded) {
@@ -76,7 +78,7 @@ export const LoginPanel = () => {
                 <Col span={3} />
                 <Col span={16}>
                     <Form.Item {...tailLayout}>
-                        <Button className="hostel-regis-submit-button" type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
                     </Form.Item>
