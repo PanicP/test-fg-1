@@ -1,19 +1,23 @@
 import React from 'react'
 import './App.css'
-import { LoginPage, NotFoundPage, UserListPage } from './pages'
+import { LoginPage, NotFoundPage, UserListPage, RegisterPage, EditProfilePage } from './pages'
 import { Router, Switch, Route } from 'react-router-dom'
 import { history } from './history'
-import { PrivateRoute } from './components/auth'
+import { PrivateRoute, AuthProvider } from './components/auth'
 
 export const App = () => {
     return (
-      <Router history={history}>
-      <Switch>
-          <Route exact path="/login" component={LoginPage} />
-          <PrivateRoute exact path="/" component={UserListPage} />
-          <Route component={NotFoundPage} />
-      </Switch>
-  </Router>
+        <AuthProvider>
+            <Router history={history}>
+                <Switch>
+                    <Route exact path="/login" component={LoginPage} />
+                    <PrivateRoute exact path="/" component={UserListPage} />
+                    <PrivateRoute exact path="/register" component={RegisterPage} />
+                    <PrivateRoute exact path="/profile/:uid" component={EditProfilePage} />
+                    <Route component={NotFoundPage} />
+                </Switch>
+            </Router>
+        </AuthProvider>
     )
 }
 

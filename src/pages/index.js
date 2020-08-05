@@ -1,3 +1,5 @@
 export { LoginPage } from './LoginPage'
 export { NotFoundPage } from './NotFoundPage'
 export { UserListPage } from './UserListPage'
+export { RegisterPage } from './RegisterPage'
+export { EditProfilePage } from './EditProfilePage'

@@ -1,33 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, Input, Button, Row, Col } from 'antd'
 import { history } from '../../history'
 import { Redirect } from 'react-router-dom'
 import { callLogIn } from '../../features/auth/authAPI'
 import firebase from '../../app/firebase'
+import { AuthContext } from './AuthProvider'
 // import { callLogIn } from '../../features/auth/auth-api'
 // import { Loading } from '../util'
 // import { useUtil } from '../../features/util/util-store'
 
 export const LoginPanel = () => {
-    // const { handleSetIsLoading } = useUtil()
-    const user = firebase.auth().currentUser
-    console.log(user, 'user')
-    const [isAuthed, setIsAuthed] = useState( user ? user.getIdToken() : '')
+    const { currentUser } = useContext(AuthContext)
 
     const onFinish = async (values) => {
-        // handleSetIsLoading({ isLoading: true })
         const isLoginSucceeded = await callLogIn({ email: values.email, password: values.password })
+
         console.log(isLoginSucceeded, 'isloginsuc')
-        setIsAuthed(isLoginSucceeded)
+        // setIsAuthed(isLoginSucceeded)
         if (isLoginSucceeded) {
             // history.push('/dada')
         }
-        // handleSetIsLoading({ isLoading: false })
     }
 
     const onFinishFailed = (errorInfo) => {}
 
-    return isAuthed ? (
+    return !!currentUser ? (
         <Redirect to="/"></Redirect>
     ) : (
         <Form
