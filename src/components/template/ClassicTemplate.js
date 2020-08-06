@@ -20,6 +20,14 @@ export const ClassicTemplate = ({ children }) => {
         history.push('/login')
     }
 
+    const handleRegister = () => {
+        history.push('/register')
+    }
+
+    const handleEditProfile= () => {
+        history.push(`/user/${user.email}`)
+    }
+
     return (
         <Fragment>
             <HeaderWrapper>
@@ -30,7 +38,11 @@ export const ClassicTemplate = ({ children }) => {
                             <PrioHeaderText onClick={() => history.push('/')}>User Management</PrioHeaderText>
                             {/* <HeaderText onClick={handleLogOut}>Login</HeaderText> */}
                             {isAuthed ? (
-                                <HeaderText onClick={handleLogOut}>Log Out</HeaderText>
+                                <Fragment>
+                                    <HeaderText onClick={handleRegister}>Register</HeaderText>
+                                    <HeaderText onClick={handleEditProfile}>Edit Profile</HeaderText>
+                                    <HeaderText onClick={handleLogOut}>Log Out</HeaderText>
+                                </Fragment>
                             ) : (
                                 <HeaderText onClick={handleLogIn}>Log In</HeaderText>
                             )}
@@ -61,8 +73,10 @@ const Header = styled.div`
 const PrioHeaderText = styled.span`
     font-size: 32px;
     font-weight: bold;
+    cursor: pointer;
 `
 
 const HeaderText = styled.span`
     font-size: 24px;
+    cursor: pointer;
 `

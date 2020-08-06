@@ -1,12 +1,12 @@
 import React from 'react'
 import { ClassicTemplate } from '../components/template'
-import { EditProfilePanel } from '../components/form'
+import { EditUserPanel } from '../components/form'
 import { FormLayout } from '../components/layout'
 
-export const EditProfilePage = ({ match, location }) => (
+export const EditUserPage = ({ match, location }) => (
     <ClassicTemplate>
         <FormLayout>
-            <EditProfilePanel uid={match.params.uid} />
+            <EditUserPanel email={match.params.email} />
         </FormLayout>
     </ClassicTemplate>
 )

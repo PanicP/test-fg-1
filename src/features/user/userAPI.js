@@ -10,8 +10,44 @@ export const callGetUsers = async () => {
                 console.log(error)
                 return []
             })
-        return usersCollection.docs.map(doc => doc.data())
+        return usersCollection.docs.map((doc) => doc.data())
     } catch (error) {
         return []
+    }
+}
+
+export const callGetUser = async ({ email }) => {
+    try {
+        const user = await firebase
+            .firestore()
+            .collection('users')
+            .doc(email)
+            .get()
+            .catch(function (error) {
+                console.log(error)
+                return {}
+            })
+        return user.data()
+    } catch (error) {
+        return {}
+    }
+}
+
+export const callUpdateUser = async ({ data, email }) => {
+    try {
+        await firebase
+            .firestore()
+            .collection('users')
+            .doc(email)
+            .update({
+                ...data,
+            })
+            .catch(function (error) {
+                console.log(error)
+                return false
+            })
+        return true
+    } catch (error) {
+        return false
     }
 }

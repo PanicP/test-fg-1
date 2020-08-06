@@ -47,7 +47,7 @@ export const callSignUp = async ({ data }) => {
                 console.log(error)
                 return false
             })
-
+        // firebase.
         await firebase
             .firestore()
             .collection('users')

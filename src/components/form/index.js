@@ -1,2 +1,2 @@
 export { RegisterPanel } from './RegisterPanel'
-export { EditProfilePanel } from './EditProfilePanel'
+export { EditUserPanel } from './EditUserPanel'

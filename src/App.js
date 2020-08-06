@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { LoginPage, NotFoundPage, UserListPage, RegisterPage, EditProfilePage } from './pages'
+import { LoginPage, NotFoundPage, UserListPage, RegisterPage, EditUserPage } from './pages'
 import { Router, Switch, Route } from 'react-router-dom'
 import { history } from './history'
 import { PrivateRoute, AuthProvider } from './components/auth'
@@ -13,7 +13,8 @@ export const App = () => {
                     <Route exact path="/login" component={LoginPage} />
                     <PrivateRoute exact path="/" component={UserListPage} />
                     <PrivateRoute exact path="/register" component={RegisterPage} />
-                    <PrivateRoute exact path="/profile/:uid" component={EditProfilePage} />
+                    <PrivateRoute exact path="/user/:email" component={EditUserPage} />
+                    {/* <PrivateRoute exact path="/profile" component={EditProfilePage} /> */}
                     <Route component={NotFoundPage} />
                 </Switch>
             </Router>

@@ -12,8 +12,8 @@ const phoneOption = [
 export const PhoneNumberField = () => {
     const prefixSelector = (
         <Fragment>
-            <Form.Item className="hostel-regis-phone-container" initialValue={'+66'} name="phoneCode" noStyle>
-                <Select className="hostel-regis-phone-selection">
+            <Form.Item nitialValue={'+66'} name="phoneCode" noStyle>
+                <Select >
                     {phoneOption.map((option) => (
                         <Select.Option value={option.value}>
                             <Avatar shape="square" size="small" src={option.image} />
@@ -26,7 +26,7 @@ export const PhoneNumberField = () => {
     )
     return (
         <Form.Item name="phoneNumber" label="Phone Number" initialValue={''} rules={[{ required: true, message: 'Phone number is required!' }]}>
-            <Input addonBefore={prefixSelector} className="hostel-regis-phone-input" maxLength={9} minLength={9} />
+            <Input addonBefore={prefixSelector} maxLength={9} minLength={9} />
         </Form.Item>
     )
 }

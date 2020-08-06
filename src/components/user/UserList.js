@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useEffect, useState } from 'react'
 import { callGetUsers } from '../../features/user/userAPI'
 import { Space, Table } from 'antd'
+import { history } from '../../history'
 
 export const UserList = () => {
     const [users, setUsers] = useState([])
@@ -12,6 +14,10 @@ export const UserList = () => {
         }
         getUsers()
     }, [])
+
+    const handleEditUser = (email) => {
+        history.push(`/user/${email}`)
+    }
 
     const columns = [
         {
@@ -74,11 +80,9 @@ export const UserList = () => {
             width: '100px',
             render: (text, record) => (
                 <Space size="middle">
-                    <a
-                        onClick={() =>
-                            {}
-                        }
-                    >
+                    <a onClick={() => {
+                        console.log(record)
+                        handleEditUser(record.email)}}>
                         <span>Edit</span>
                     </a>
                 </Space>
