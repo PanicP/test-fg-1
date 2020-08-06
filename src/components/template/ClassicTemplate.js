@@ -24,7 +24,7 @@ export const ClassicTemplate = ({ children }) => {
         history.push('/register')
     }
 
-    const handleEditProfile= () => {
+    const handleEditProfile = () => {
         history.push(`/user/${user.email}`)
     }
 
@@ -51,8 +51,16 @@ export const ClassicTemplate = ({ children }) => {
                     <Col span={4} />
                 </Row>
             </HeaderWrapper>
-            {children}
-            <div></div>
+            <BodyWrapper>{children}</BodyWrapper>
+            <FooterWrapper>
+                <Row gutter={16}>
+                    <Col span={4} />
+                    <Col span={16}>
+                        <Footer> Created by PanicP</Footer>
+                    </Col>
+                    <Col span={4} />
+                </Row>
+            </FooterWrapper>
         </Fragment>
     )
 }
@@ -65,6 +73,7 @@ const HeaderWrapper = styled.div`
 const Header = styled.div`
     display: flex;
     width: 100%;
+    height: 64px;
     justify-content: space-between;
     font-size: 32px;
     align-items: center;
@@ -79,4 +88,23 @@ const PrioHeaderText = styled.span`
 const HeaderText = styled.span`
     font-size: 24px;
     cursor: pointer;
+`
+
+const BodyWrapper = styled.div`
+    width: 100%;
+    min-height: calc(95vh - 128px);
+`
+
+const FooterWrapper = styled.div`
+    height: 64px;
+    border-top: 1px solid lightgrey;
+`
+
+const Footer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 64px;
+    font-size: 16px;
 `

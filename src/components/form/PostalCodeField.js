@@ -13,6 +13,6 @@ export const PostalCodeField = ({ data }) => (
             },
         ]}
     >
-        <Input placeholder="10110" />
+        <Input minLength={5} maxLength={5} placeholder="10110" />
     </Form.Item>
 )

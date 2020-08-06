@@ -19,5 +19,5 @@ export const LoginLayout = ({ children }) => {
 }
 
 const LoginLayoutWrapper = styled.div`
-    margin-top: 20vh;
+    margin-top: 5vh;
 `

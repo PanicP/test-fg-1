@@ -11,6 +11,10 @@ export const EmailField = ({ data }) => (
                 required: true,
                 message: 'Email is required!',
             },
+            {
+                type: 'email',
+                message: 'Please fill a valid E-mail!',
+            },
         ]}
     >
         <Input placeholder="John@john.com" />

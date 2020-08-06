@@ -13,6 +13,6 @@ export const AgeField = ({ data }) => (
             },
         ]}
     >
-        <Input placeholder="99" />
+        <Input placeholder="99" maxLength={2}/>
     </Form.Item>
 )

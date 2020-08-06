@@ -25,6 +25,6 @@ export const ConfirmPasswordField = ({ data }) => (
             }),
         ]}
     >
-        <Input.Password placeholder="■■■■■■■■" iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} />
+        <Input.Password placeholder="■■■■■■■■" minLength={8} iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} />
     </Form.Item>
 )
