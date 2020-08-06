@@ -37,15 +37,17 @@ export const ClassicTemplate = ({ children }) => {
                     <Col span={16}>
                         <Header>
                             <PrioHeaderText onClick={() => history.push('/')}>User Management</PrioHeaderText>
-                            {currentUser ? (
-                                <Fragment>
-                                    <HeaderText onClick={handleRegister}>Register</HeaderText>
-                                    <HeaderText onClick={handleEditProfile}>Edit Profile</HeaderText>
-                                    <HeaderText onClick={handleLogOut}>Log Out</HeaderText>
-                                </Fragment>
-                            ) : (
-                                <HeaderText onClick={handleLogIn}>Log In</HeaderText>
-                            )}
+                            <div>
+                                <HeaderText onClick={handleRegister}>Register</HeaderText>
+                                {currentUser ? (
+                                    <Fragment>
+                                        <HeaderText onClick={handleEditProfile}>Edit Profile</HeaderText>
+                                        <HeaderText onClick={handleLogOut}>Log Out</HeaderText>
+                                    </Fragment>
+                                ) : (
+                                    <HeaderText onClick={handleLogIn}>Log In</HeaderText>
+                                )}
+                            </div>
                         </Header>
                     </Col>
                     <Col span={4} />
@@ -86,6 +88,7 @@ const PrioHeaderText = styled.span`
 `
 
 const HeaderText = styled.span`
+    margin-left: 24px;
     font-size: 24px;
     cursor: pointer;
 `

@@ -11,10 +11,9 @@ export const App = () => {
             <Router history={history}>
                 <Switch>
                     <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/register" component={RegisterPage} />
                     <PrivateRoute exact path="/" component={UserListPage} />
-                    <PrivateRoute exact path="/register" component={RegisterPage} />
                     <PrivateRoute exact path="/user/:email" component={EditUserPage} />
-                    {/* <PrivateRoute exact path="/profile" component={EditProfilePage} /> */}
                     <Route component={NotFoundPage} />
                 </Switch>
             </Router>

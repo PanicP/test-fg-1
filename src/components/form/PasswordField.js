@@ -7,7 +7,6 @@ export const PasswordField = ({ data }) => (
         name="password"
         label="Password"
         initialValue={data}
-        hasFeedback
         rules={[
             {
                 required: true,

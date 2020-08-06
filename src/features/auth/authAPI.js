@@ -1,4 +1,5 @@
 import firebase from '../../app/firebase'
+import tempFirebase from '../../app/tempfirebase'
 
 export const callLogIn = async ({ email, password }) => {
     try {
@@ -10,6 +11,7 @@ export const callLogIn = async ({ email, password }) => {
             })
         const user = firebase.auth().currentUser
         if (user) {
+            console.log('logged in', await user.getIdToken())
             return true
         }
         return false
@@ -28,6 +30,7 @@ export const callLogOut = async () => {
             })
         const user = firebase.auth().currentUser
         if (!user) {
+            console.log('logged out')
             return true
         }
         return false
@@ -38,10 +41,11 @@ export const callLogOut = async () => {
 
 export const callSignUp = async ({ data }) => {
     try { 
-        await firebase
+        await tempFirebase
             .auth()
             .createUserWithEmailAndPassword(data.email, data.password)
             .catch(function (error) {
+                console.log(error)
                 return false
             })
 
@@ -64,6 +68,7 @@ export const callSignUp = async ({ data }) => {
                 title: data.title,
             })
             .catch(function (error) {
+                console.log(error)
                 return false
             })
 
