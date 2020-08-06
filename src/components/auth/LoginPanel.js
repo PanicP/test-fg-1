@@ -1,13 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Form, Input, Button, Row, Col } from 'antd'
-import { history } from '../../history'
 import { Redirect } from 'react-router-dom'
 import { callLogIn } from '../../features/auth/authAPI'
-import firebase from '../../app/firebase'
 import { AuthContext } from './AuthProvider'
-// import { callLogIn } from '../../features/auth/auth-api'
-// import { Loading } from '../util'
-// import { useUtil } from '../../features/util/util-store'
+import { history } from '../../history'
 
 export const LoginPanel = () => {
     const { currentUser } = useContext(AuthContext)
@@ -15,10 +11,8 @@ export const LoginPanel = () => {
     const onFinish = async (values) => {
         const isLoginSucceeded = await callLogIn({ email: values.email, password: values.password })
 
-        console.log(isLoginSucceeded, 'isloginsuc')
-        // setIsAuthed(isLoginSucceeded)
         if (isLoginSucceeded) {
-            // history.push('/dada')
+            history.push('/')
         }
     }
 

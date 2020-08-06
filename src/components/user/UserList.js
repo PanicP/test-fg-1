@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { callGetUsers } from '../../features/user/userAPI'
 import { Space, Table } from 'antd'
 import { history } from '../../history'
@@ -80,9 +80,11 @@ export const UserList = () => {
             width: '100px',
             render: (text, record) => (
                 <Space size="middle">
-                    <a onClick={() => {
-                        console.log(record)
-                        handleEditUser(record.email)}}>
+                    <a
+                        onClick={() => {
+                            handleEditUser(record.email)
+                        }}
+                    >
                         <span>Edit</span>
                     </a>
                 </Space>
@@ -92,7 +94,7 @@ export const UserList = () => {
 
     return (
         <div>
-            <Table dataSource={users} columns={columns} pagination={false} />
+            <Table dataSource={users} columns={columns} pagination={false} locale={{ emptyText: '. . .' }} />
         </div>
     )
 }

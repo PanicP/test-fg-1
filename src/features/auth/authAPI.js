@@ -10,7 +10,6 @@ export const callLogIn = async ({ email, password }) => {
             })
         const user = firebase.auth().currentUser
         if (user) {
-            console.log('logged in', await user.getIdToken())
             return true
         }
         return false
@@ -29,7 +28,6 @@ export const callLogOut = async () => {
             })
         const user = firebase.auth().currentUser
         if (!user) {
-            console.log('logged out')
             return true
         }
         return false
@@ -44,10 +42,9 @@ export const callSignUp = async ({ data }) => {
             .auth()
             .createUserWithEmailAndPassword(data.email, data.password)
             .catch(function (error) {
-                console.log(error)
                 return false
             })
-        // firebase.
+
         await firebase
             .firestore()
             .collection('users')
@@ -67,7 +64,6 @@ export const callSignUp = async ({ data }) => {
                 title: data.title,
             })
             .catch(function (error) {
-                console.log(error)
                 return false
             })
 

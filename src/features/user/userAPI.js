@@ -7,7 +7,6 @@ export const callGetUsers = async () => {
             .collection('users')
             .get()
             .catch(function (error) {
-                console.log(error)
                 return []
             })
         return usersCollection.docs.map((doc) => doc.data())
@@ -24,7 +23,6 @@ export const callGetUser = async ({ email }) => {
             .doc(email)
             .get()
             .catch(function (error) {
-                console.log(error)
                 return {}
             })
         return user.data()
@@ -43,7 +41,6 @@ export const callUpdateUser = async ({ data, email }) => {
                 ...data,
             })
             .catch(function (error) {
-                console.log(error)
                 return false
             })
         return true

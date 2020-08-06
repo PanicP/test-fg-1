@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react'
 import { Form, Button, Row, Col } from 'antd'
 import { TitleField } from './TitleField'
 import { FirstNameField } from './FirstNameField'
 import { LastNameField } from './LastNameField'
 import { PhoneNumberField } from './PhoneNumberField'
 import { history } from '../../history'
-import { Redirect } from 'react-router-dom'
 import { callGetUser, callUpdateUser } from '../../features/user/userAPI'
 import { AgeField } from './AgeField'
 import { AddressField } from './AddressField'
@@ -17,11 +17,9 @@ import styled from 'styled-components'
 
 export const EditUserPanel = ({ email }) => {
     const [form] = Form.useForm()
-    const [isAuthed, setIsAuthed] = useState(localStorage.getItem('authToken'))
-    // const [userData, setUserData] = useState({})
 
     useEffect(() => {
-        const getUser = async () => { 
+        const getUser = async () => {
             const user = await callGetUser({ email })
             form.setFieldsValue({
                 ...user,
@@ -32,17 +30,15 @@ export const EditUserPanel = ({ email }) => {
 
     const onFinish = async (values) => {
         const isSignUpSucceeded = await callUpdateUser({ data: values, email })
-        // setIsAuthed(isLoginSucceeded)
+
         if (isSignUpSucceeded) {
             history.push('/')
         }
     }
 
-    return isAuthed ? (
-        <Redirect to="/"></Redirect>
-    ) : (
+    return (
         <Form form={form} onFinish={onFinish}>
-           <Row gutter={16}>
+            <Row gutter={16}>
                 <Col span={4}>
                     <TitleField />
                 </Col>
@@ -90,5 +86,5 @@ export const EditUserPanel = ({ email }) => {
 }
 
 const StyledButton = styled(Button)`
-    width: 100%
+    width: 100%;
 `

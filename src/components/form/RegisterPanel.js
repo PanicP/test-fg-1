@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Button, Row, Col } from 'antd'
 import { TitleField } from './TitleField'
 import { FirstNameField } from './FirstNameField'
@@ -8,7 +8,6 @@ import { EmailField } from './EmailField'
 import { PasswordField } from './PasswordField'
 import { ConfirmPasswordField } from './ConfirmPasswordField'
 import { history } from '../../history'
-import { Redirect } from 'react-router-dom'
 import { callSignUp } from '../../features/auth/authAPI'
 import { AddressField } from './AddressField'
 import { SubDistrictField } from './SubDistrictField'
@@ -19,21 +18,17 @@ import { AgeField } from './AgeField'
 
 export const RegisterPanel = () => {
     const [form] = Form.useForm()
-    const [isAuthed, setIsAuthed] = useState(localStorage.getItem('authToken'))
 
     const onFinish = async (values) => {
-        console.log('on register', values.email, values.password)
-        console.log(values)
+
         const isSignUpSucceeded = await callSignUp({ data: values })
-        // setIsAuthed(isLoginSucceeded)
+
         if (isSignUpSucceeded) {
             history.push('/')
         }
     }
 
-    return isAuthed ? (
-        <Redirect to="/"></Redirect>
-    ) : (
+    return (
         <Form form={form} onFinish={onFinish}>
             <Row gutter={16}>
                 <Col span={8}>

@@ -1,13 +1,14 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { Row, Col } from 'antd'
 import styled from 'styled-components'
 import { history } from '../../history'
 import { callLogOut } from '../../features/auth/authAPI'
 import firebase from '../../app/firebase'
+import { AuthContext } from '../auth/AuthProvider'
 
 export const ClassicTemplate = ({ children }) => {
     const user = firebase.auth().currentUser
-    const [isAuthed, setIsAuthed] = useState(user ? user.getIdToken() : '')
+    const { currentUser } = useContext(AuthContext)
 
     const handleLogOut = async () => {
         const isLogOutSucceeded = await callLogOut()
@@ -36,8 +37,7 @@ export const ClassicTemplate = ({ children }) => {
                     <Col span={16}>
                         <Header>
                             <PrioHeaderText onClick={() => history.push('/')}>User Management</PrioHeaderText>
-                            {/* <HeaderText onClick={handleLogOut}>Login</HeaderText> */}
-                            {isAuthed ? (
+                            {currentUser ? (
                                 <Fragment>
                                     <HeaderText onClick={handleRegister}>Register</HeaderText>
                                     <HeaderText onClick={handleEditProfile}>Edit Profile</HeaderText>
