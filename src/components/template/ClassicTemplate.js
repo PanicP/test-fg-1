@@ -70,6 +70,7 @@ export const ClassicTemplate = ({ children }) => {
 const HeaderWrapper = styled.div`
     height: 64px;
     border-bottom: 1px solid lightgrey;
+    background-color: #f5f5f5;
 `
 
 const Header = styled.div`
@@ -101,6 +102,7 @@ const BodyWrapper = styled.div`
 const FooterWrapper = styled.div`
     height: 64px;
     border-top: 1px solid lightgrey;
+    background-color: #f5f5f5;
 `
 
 const Footer = styled.div`
