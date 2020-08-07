@@ -5,15 +5,18 @@ import { callLogIn } from '../../features/auth/authAPI'
 import { AuthContext } from './AuthProvider'
 import { history } from '../../history'
 import styled from 'styled-components'
+import { ErrorModal } from './ErrorModal'
 
 export const LoginPanel = () => {
     const { currentUser } = useContext(AuthContext)
 
     const onFinish = async (values) => {
-        const isLoginSucceeded = await callLogIn({ email: values.email, password: values.password })
+        const { isLoginSucceeded, error } = await callLogIn({ email: values.email, password: values.password })
 
         if (isLoginSucceeded) {
             history.push('/')
+        } else {
+            ErrorModal({ error })
         }
     }
 

@@ -3,20 +3,21 @@ import tempFirebase from '../../app/tempfirebase'
 
 export const callLogIn = async ({ email, password }) => {
     try {
-        await firebase
+        const error = await firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
             .catch(function (error) {
-                return false
+                console.log(false, error.message)
+                return error.message
             })
         const user = firebase.auth().currentUser
         if (user) {
-            console.log('logged in', await user.getIdToken())
-            return true
+            return { isLoginSucceeded: true, error: '' }
+        } else {
+            return { isLoginSucceeded: false, error }
         }
-        return false
     } catch (error) {
-        return false
+        return { isLoginSucceeded: false, error: error.message }
     }
 }
 
@@ -30,26 +31,25 @@ export const callLogOut = async () => {
             })
         const user = firebase.auth().currentUser
         if (!user) {
-            console.log('logged out')
             return true
+        } else {
+            return false
         }
-        return false
     } catch (error) {
         return false
     }
 }
 
 export const callSignUp = async ({ data }) => {
-    try { 
-        await tempFirebase
+    try {
+        const errorAuth = await tempFirebase
             .auth()
             .createUserWithEmailAndPassword(data.email, data.password)
             .catch(function (error) {
-                console.log(error)
-                return false
+                return error.message
             })
 
-        await firebase
+        const errorDB = await firebase
             .firestore()
             .collection('users')
             .doc(data.email)
@@ -68,12 +68,23 @@ export const callSignUp = async ({ data }) => {
                 title: data.title,
             })
             .catch(function (error) {
-                console.log(error)
-                return false
+                return error.message
             })
 
-        return true
+        if (typeof errorAuth !== 'string' && typeof errorDB !== 'string') {
+            console.log(1)
+            return { isSignUpSucceeded: true, error: '' }
+        } else if (typeof errorAuth === 'string') {
+            console.log(2)
+            return { isSignUpSucceeded: false, error: errorAuth }
+        } else if (typeof errorDB === 'string') {
+            console.log(3)
+            return { isSignUpSucceeded: false, error: errorDB }
+        } else {
+            console.log(4)
+            return { isSignUpSucceeded: false, error: 'There is something wrong!' }
+        }
     } catch (error) {
-        return false
+        return { isSignUpSucceeded: false, error: error.message }
     }
 }

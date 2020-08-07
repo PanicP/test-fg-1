@@ -16,16 +16,19 @@ import { ProvinceField } from './ProvinceField'
 import { PostalCodeField } from './PostalCodeField'
 import { AgeField } from './AgeField'
 import styled from 'styled-components'
+import { ErrorModal } from '../auth/ErrorModal'
 
 export const RegisterPanel = () => {
     const [form] = Form.useForm()
 
     const onFinish = async (values) => {
-
-        const isSignUpSucceeded = await callSignUp({ data: values })
-
+        const { isSignUpSucceeded, error } = await callSignUp({ data: values })
+        console.log(isSignUpSucceeded, error)
         if (isSignUpSucceeded) {
+            console.log('triggered push')
             history.push('/')
+        } else {
+            ErrorModal({ error })
         }
     }
 
