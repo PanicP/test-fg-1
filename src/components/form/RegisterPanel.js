@@ -15,6 +15,7 @@ import { DistrictField } from './DistrictField'
 import { ProvinceField } from './ProvinceField'
 import { PostalCodeField } from './PostalCodeField'
 import { AgeField } from './AgeField'
+import styled from 'styled-components'
 
 export const RegisterPanel = () => {
     const [form] = Form.useForm()
@@ -79,11 +80,15 @@ export const RegisterPanel = () => {
             </Row>
             <Row gutter={16}>
                 <Col span={24}>
-                    <Button htmlType="submit" color="primary" type="primary">
+                    <StyledButton htmlType="submit" color="primary" type="primary">
                         Submit
-                    </Button>
+                    </StyledButton>
                 </Col>
             </Row>
         </Form>
     )
 }
+
+const StyledButton = styled(Button)`
+    width: 100%;
+`

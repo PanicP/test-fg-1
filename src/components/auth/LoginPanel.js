@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { callLogIn } from '../../features/auth/authAPI'
 import { AuthContext } from './AuthProvider'
 import { history } from '../../history'
+import styled from 'styled-components'
 
 export const LoginPanel = () => {
     const { currentUser } = useContext(AuthContext)
@@ -71,9 +72,9 @@ export const LoginPanel = () => {
                 <Col span={3} />
                 <Col span={16}>
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit">
+                        <StyledButton type="primary" htmlType="submit">
                             Submit
-                        </Button>
+                        </StyledButton>
                     </Form.Item>
                 </Col>
                 <Col span={5} />
@@ -97,3 +98,7 @@ const tailLayout = {
         span: 18,
     },
 }
+
+const StyledButton = styled(Button)`
+    width: 100%;
+`

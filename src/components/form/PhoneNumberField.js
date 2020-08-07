@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Select, Form, Input, Avatar } from 'antd'
+import { handleOnlyNumberAvailable } from '../../features/form/helpers'
 
 const phoneOption = [
     {
@@ -31,7 +32,7 @@ export const PhoneNumberField = () => {
             initialValue={''}
             rules={[{ required: true, message: 'Phone number is required!' }]}
         >
-            <Input addonBefore={prefixSelector} maxLength={9} minLength={9} />
+            <Input addonBefore={prefixSelector} maxLength={9} minLength={9}  onKeyPress={handleOnlyNumberAvailable}/>
         </Form.Item>
     )
 }

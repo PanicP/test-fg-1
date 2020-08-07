@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Input } from 'antd'
+import { handleOnlyNumberAvailable } from '../../features/form/helpers'
 
 export const PostalCodeField = ({ data }) => (
     <Form.Item
@@ -13,6 +14,6 @@ export const PostalCodeField = ({ data }) => (
             },
         ]}
     >
-        <Input minLength={5} maxLength={5} placeholder="10110" />
+        <Input minLength={5} maxLength={5} placeholder="10110"  onKeyPress={handleOnlyNumberAvailable}/>
     </Form.Item>
 )
